@@ -15,7 +15,7 @@ header.addEventListener("click", (e) => {
   switch (e.target.id) {
     case "plant":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "";
+      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPlants();
@@ -23,7 +23,7 @@ header.addEventListener("click", (e) => {
       break;
     case "pollinator":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "";
+      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPollinators();
@@ -31,7 +31,7 @@ header.addEventListener("click", (e) => {
       break;
     case "form":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "";
+      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       e.preventDefault();
       renderForm();
@@ -66,6 +66,7 @@ function renderSinglePlants() {
       capsule.style.backgroundImage = `url(${targetedPlant.image})`;
 
       singleDisplay.innerHTML = `
+                     
                     <div class="plantDiv">
                     <h1>${targetedPlant.common_name}</h1>
                     <h3> Latin Name: ${targetedPlant.latin_name}</h3>
@@ -130,6 +131,7 @@ function renderSinglePollinators() {
     if (e.target.className === "renderpollinatorbutton") {
       capsule.style.backgroundImage = `url(${targetedPollinator.image})`;
       singleDisplay.innerHTML = `
+                    
                     <div class="pollinatorDiv">
                     <h1>${targetedPollinator.name}</h1>
                     <h3> Species: ${targetedPollinator.species}</h3>
@@ -233,10 +235,10 @@ function plantUpdate() {
 
       singleDisplay.innerHTML = `
         <form id="editPlant">
-        <label name='plantDescription'> Description:</label>
-        <input  name='plantDescription' value="${plantDescriptionValue}">
+        <label name='plantDescription'> Description:</label><br>
+        <input name='plantDescription' value="${plantDescriptionValue}"><br><br>
        
-       <label name="plantZone"> Hardiness Zones:</label>
+       <label name="plantZone"> Hardiness Zones:</label><br>
        <input name="plantZone" value="${plantZoneValue}">
         <input type='submit' value='Submit'>
  
@@ -272,7 +274,7 @@ function pollinatorUpdate() {
     if (e.target.className === "updatePollinator") {
       singleDisplay.innerHTML = `
         <form id="editPollinator">
-        <label name='pollinatortDescription'> Description:</label>
+        <label name='pollinatortDescription'> Description:</label><br>
         <input  name='pollinatorDescription' value="${
           pollinatorArray.find((pol) => {
             return parseInt(e.target.id, 10) === pol.id;
