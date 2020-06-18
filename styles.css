@@ -5,12 +5,18 @@ img {
   width: 150px; /* Set a small width */
 }
 
+body {
+  background-color: antiquewhite;
+}
+
 #single-display {
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -50px;
   margin-left: -100px;
+  background-color: antiquewhite;
+  padding: 25px 30px;
 }
 
 #capsule {
@@ -23,7 +29,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(240, 194, 46);
+  background-color: #f3de97f5;
 }
 
 li {
@@ -32,7 +38,7 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: #4e6172;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -40,5 +46,28 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-  background-color: #111;
+  background-color: #a3adb8;
+}
+
+#container {
+  background-color: rgb(231, 214, 182);
+}
+
+.plantDiv {
+  border: 5px solid #a3adb8;
+  padding: 14px 16px;
+}
+
+.pollinatorDiv {
+  border: 5px solid #a3adb8;
+  padding: 14px 16px;
+}
+.pollinator-card {
+  border-right: 2px solid #a3adb8;
+  padding: 14px 16px;
+}
+
+.plant-card {
+  border-right: 2px solid #a3adb8;
+  padding: 14px 16px;
 }

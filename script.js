@@ -19,7 +19,7 @@ header.addEventListener("click", (e) => {
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPlants();
-      
+
       break;
     case "pollinator":
       container.innerHTML = "";
@@ -27,7 +27,7 @@ header.addEventListener("click", (e) => {
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPollinators();
-     
+
       break;
     case "form":
       container.innerHTML = "";
@@ -45,103 +45,103 @@ function styleBlock() {
     container.style.display = "block";
   }
 }
-function renderAllPlants(){
+function renderAllPlants() {
   plantArray.forEach((plant) => {
-    
-        container.innerHTML += `<main class="plant-card"><p>${plant.common_name}<br>(${plant.latin_name})</br><br><img src="${plant.image}"><button class="renderplantbutton" id="${plant.id}">View More</button ></p><br>
+    container.innerHTML += `<main class="plant-card"><p>${plant.common_name}<br>(${plant.latin_name})</br><br><img src="${plant.image}"><button class="renderplantbutton" id="${plant.id}">View More</button ></p><br>
            
             
             </main>`;
-      });
-
-};
+  });
+}
 
 function renderSinglePlants() {
-      container.addEventListener("click", (e) => {
-        const targetedPlant = plantArray[e.target.id - 1];
-        const plantPollinators = targetedPlant.pollinators;
-        const pollinatorNames = plantPollinators.map(
-          (pollinator) => pollinator.name
-        );
+  container.addEventListener("click", (e) => {
+    const targetedPlant = plantArray[e.target.id - 1];
+    const plantPollinators = targetedPlant.pollinators;
+    const pollinatorNames = plantPollinators.map(
+      (pollinator) => pollinator.name
+    );
 
-        if (e.target.className === "renderplantbutton") {
-          capsule.style.backgroundImage = `url(${targetedPlant.image})`;
+    if (e.target.className === "renderplantbutton") {
+      capsule.style.backgroundImage = `url(${targetedPlant.image})`;
 
-          singleDisplay.innerHTML = `
+      singleDisplay.innerHTML = `
+                    <div class="plantDiv">
                     <h1>${targetedPlant.common_name}</h1>
                     <h3> Latin Name: ${targetedPlant.latin_name}</h3>
                     <p> Hardiness Zone: ${targetedPlant.zone}</p>
-                    <p class='description'  >About This Plant:${targetedPlant.description}</p>
+                    <p class='description'  >About This Plant:${
+                      targetedPlant.description
+                    }</p>
 
-                    <h3 id ='h3'>Pollinators That Love This Plant: ${pollinatorNames.join(" ")}</h3>
-                   <button id ='${targetedPlant.id}' class="updatePlant">Update Plant Informationt</button>
+                    <h3 id ='h3'>Pollinators That Love This Plant: ${pollinatorNames.join(
+                      " "
+                    )}</h3>
+                   <button id ='${
+                     targetedPlant.id
+                   }' class="updatePlant">Update Plant Informationt</button>
+                   </div>
                     `;
-        };
-    });
-    
-};
+    }
+  });
+}
 
-function fetchPollinator(){
-    fetch("http://localhost:3000/pollinators")
+function fetchPollinator() {
+  fetch("http://localhost:3000/pollinators")
     .then((res) => res.json())
     .then((pollinators) => {
-        pollinatorArray = pollinators
-      
-    //   pollinators.forEach((pollinator) => {
-        
-    //     container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}(${pollinator.species})</br><button class="renderButton" id="${pollinator.id}">View More</button></p>
-    //           <img src="${pollinator.image}">
-    //         </main>`;
-    //   });
+      pollinatorArray = pollinators;
 
-     })
-};
+      //   pollinators.forEach((pollinator) => {
 
-function fetchPlants(){
-    fetch("http://localhost:3000/plants")
+      //     container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}(${pollinator.species})</br><button class="renderButton" id="${pollinator.id}">View More</button></p>
+      //           <img src="${pollinator.image}">
+      //         </main>`;
+      //   });
+    });
+}
+
+function fetchPlants() {
+  fetch("http://localhost:3000/plants")
     .then((res) => res.json())
     .then((plants) => {
-        plantArray = plants
-    //   plants.forEach((plant) => {
-    
-    //     container.innerHTML += `<main class="plant-card"><p>${plant.common_name}(${plant.latin_name})</br><button id="${plant.id}">View More</button></p>
-    //         <img src="${plant.image}">
-            
-    //         </main>`;
-    //   });
+      plantArray = plants;
+      //   plants.forEach((plant) => {
 
+      //     container.innerHTML += `<main class="plant-card"><p>${plant.common_name}(${plant.latin_name})</br><button id="${plant.id}">View More</button></p>
+      //         <img src="${plant.image}">
+
+      //         </main>`;
+      //   });
     });
-};
+}
 
-function renderAllPollinators(){
-       pollinatorArray.forEach((pollinator) => {
-        
-        container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}<br>(${pollinator.species})</br><br><img src="${pollinator.image}"><button class="renderpollinatorbutton" id="${pollinator.id}">View More</button></p><br>
+function renderAllPollinators() {
+  pollinatorArray.forEach((pollinator) => {
+    container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}<br>(${pollinator.species})</br><br><img src="${pollinator.image}"><button class="renderpollinatorbutton" id="${pollinator.id}">View More</button></p><br>
               
             </main>`;
-      });
-
-};
+  });
+}
 
 function renderSinglePollinators() {
-  
-      container.addEventListener("click", (e) => {
-        const targetedPollinator = pollinatorArray[e.target.id - 1];
-        if (e.target.className === "renderpollinatorbutton") {
-          capsule.style.backgroundImage = `url(${targetedPollinator.image})`;
-          singleDisplay.innerHTML = `
+  container.addEventListener("click", (e) => {
+    const targetedPollinator = pollinatorArray[e.target.id - 1];
+    if (e.target.className === "renderpollinatorbutton") {
+      capsule.style.backgroundImage = `url(${targetedPollinator.image})`;
+      singleDisplay.innerHTML = `
+                    <div class="pollinatorDiv">
                     <h1>${targetedPollinator.name}</h1>
                     <h3> Species: ${targetedPollinator.species}</h3>
                     <p class="pollinatorDescription">About This Pollinator: ${targetedPollinator.description}</p><br>
-                    <button id="${targetedPollinator.id}" class="updatePollinator">Update Pollinator Informationt</button>
+                    <button id="${targetedPollinator.id}" class="updatePollinator">Update Pollinator Information</button>
+                    </div>
                     `;
-        }
-    });
-};
-
+    }
+  });
+}
 
 function renderForm() {
-   
   singleDisplay.innerHTML = `<form  method="post" id ="newPlantForm">
   <h1> Add a New Plant to the Collection</h1>
             
@@ -172,146 +172,136 @@ function renderForm() {
             <br><input type='submit' value='Submit'>
 
          </form>`;
-        submitNewPlantEvent();
-        
-      
-       
-};
+  submitNewPlantEvent();
+}
 
-function submitNewPlantEvent(){
-  singleDisplay.addEventListener('submit', (e) =>{
+function submitNewPlantEvent() {
+  singleDisplay.addEventListener("submit", (e) => {
     e.preventDefault();
-    const form = document.getElementById('newPlantForm')
-    
-    const checkboxes = Array.from(form.pollinator)
-  
-    const checkedPollinators = checkboxes.filter(checkbox => checkbox.checked === true)
+    const form = document.getElementById("newPlantForm");
+
+    const checkboxes = Array.from(form.pollinator);
+
+    const checkedPollinators = checkboxes.filter(
+      (checkbox) => checkbox.checked === true
+    );
     // console.log(checkedPollinators)
 
-    const sendPollinatorIds = checkedPollinators.map((pollinator) => {return (pollinator.id)})
-    console.log(sendPollinatorIds)
+    const sendPollinatorIds = checkedPollinators.map((pollinator) => {
+      return pollinator.id;
+    });
+    console.log(sendPollinatorIds);
     // console.log(form.zone.value)
     // console.log(form.fname.value)
     // console.log(form.lname.value)
     // console.log(form.description.value)
     // console.log(form.imgurl.value)
-    
-   
 
     // 2)  now we will filter out checkboxes that aren't checked
     // 3)  after fitlering, map over array so that each element is an ID
-         fetch('http://localhost:3000/plants', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify({
-                  plant: {
-                    common_name: form.fname.value,
-                    latin_name: form.lname.value,
-                    description: form.description.value,
-                    image: form.imgurl.value,
-                    zone: form.zone.value,
-                    pollinator_ids: sendPollinatorIds
-                  }
-                })
-            })
-      
-    })
+    fetch("http://localhost:3000/plants", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        plant: {
+          common_name: form.fname.value,
+          latin_name: form.lname.value,
+          description: form.description.value,
+          image: form.imgurl.value,
+          zone: form.zone.value,
+          pollinator_ids: sendPollinatorIds,
+        },
+      }),
+    });
+  });
 }
 
+function plantUpdate() {
+  singleDisplay.addEventListener("click", (e) => {
+    const plantId = e.target.id;
 
-function plantUpdate(){
-  singleDisplay.addEventListener('click', (e) => {
-    const plantId = (e.target.id)
+    if (e.target.className === "updatePlant") {
+      const plantDescriptionValue = plantArray.find((plant) => {
+        return parseInt(e.target.id, 10) === plant.id;
+      }).description;
+      const plantZoneValue = plantArray.find((plant) => {
+        return parseInt(e.target.id, 10) === plant.id;
+      }).zone;
 
-      if(e.target.className === 'updatePlant'){
-       
-      const plantDescriptionValue = plantArray.find((plant) => {return parseInt(e.target.id, 10) === plant.id}).description
-      const plantZoneValue = plantArray.find((plant) => {return parseInt(e.target.id, 10) === plant.id}).zone
-       
-        singleDisplay.innerHTML = `
+      singleDisplay.innerHTML = `
         <form id="editPlant">
         <label name='plantDescription'> Description:</label>
-        <input  name='plantDescription' value=${plantDescriptionValue}>
+        <input  name='plantDescription' value="${plantDescriptionValue}">
        
        <label name="plantZone"> Hardiness Zones:</label>
-       <input name="plantZone" value=${plantZoneValue}>
+       <input name="plantZone" value="${plantZoneValue}">
         <input type='submit' value='Submit'>
  
         </form>
-        `
-        singleDisplay.addEventListener('submit', (e) =>{
-          e.preventDefault()
-          //console.log(plantId)
-          const form = document.getElementById('editPlant')
-          
-          // debugger
-           fetch(`http://localhost:3000/plants/${plantId}`, {
-               method: 'PATCH',
-               headers: {
-                   "Content-Type": "application/json",
-                   "Accept": "application/json",
-               },
-               body: JSON.stringify({
-                   plant: {
-                    
-                     description: form.plantDescription.value,
-                     zone: form.plantZone.value,
-                    
-                   }
-                })
-             })
-        })
-      }
-    
-  })
+        `;
+      singleDisplay.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-};
+        const form = document.getElementById("editPlant");
 
-function pollinatorUpdate(){
-  singleDisplay.addEventListener('click', (e) => {
-    const pollinatorId = (e.target.id)
+        fetch(`http://localhost:3000/plants/${plantId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            plant: {
+              description: form.plantDescription.value,
+              zone: form.plantZone.value,
+            },
+          }),
+        });
+      });
+    }
+  });
+}
 
-      if(e.target.className === 'updatePollinator'){
-       
-      
-       
-        singleDisplay.innerHTML = `
+function pollinatorUpdate() {
+  singleDisplay.addEventListener("click", (e) => {
+    const pollinatorId = e.target.id;
+
+    if (e.target.className === "updatePollinator") {
+      singleDisplay.innerHTML = `
         <form id="editPollinator">
         <label name='pollinatortDescription'> Description:</label>
-        <input  name='pollinatorDescription' value="${pollinatorArray.find((pol) => {return parseInt(e.target.id, 10) === pol.id}).description}">
+        <input  name='pollinatorDescription' value="${
+          pollinatorArray.find((pol) => {
+            return parseInt(e.target.id, 10) === pol.id;
+          }).description
+        }">
        
       
         <input type='submit' value='Submit'>
  
         </form>
-        `
-        singleDisplay.addEventListener('submit', (e) =>{
-          e.preventDefault()
-          console.log(pollinatorId)
-          const form = document.getElementById('editPlant')
-          
-      
-           fetch(`http://localhost:3000/pollinators/${pollinatorId}`, {
-               method: 'PATCH',
-               headers: {
-                   "Content-Type": "application/json",
-                   "Accept": "application/json",
-               },
-               body: JSON.stringify({
-                   plant: {
-                    
-                     description: form.plantDescription.value,
-                     zone: form.plantZone.value,
-                    
-                   }
-                })
-             })
-        })
-      }
-    
-  })
+        `;
+      singleDisplay.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(pollinatorId);
+        const form = document.getElementById("editPollinator");
 
-};
+        fetch(`http://localhost:3000/pollinators/${pollinatorId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            plant: {
+              description: form.pollinatorDescription.value,
+            },
+          }),
+        });
+      });
+    }
+  });
+}
