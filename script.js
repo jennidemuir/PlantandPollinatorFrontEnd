@@ -70,7 +70,7 @@ function renderSinglePlants() {
                     <h1>${targetedPlant.common_name}</h1>
                     <h3> Latin Name: ${targetedPlant.latin_name}</h3>
                     <p> Hardiness Zone: ${targetedPlant.zone}</p>
-                    <p class='description'  >About This Plant:${
+                    <p class='description'  >About This Plant: ${
                       targetedPlant.description
                     }</p>
 
@@ -243,6 +243,7 @@ function plantUpdate() {
         </form>
         `;
       singleDisplay.addEventListener("submit", (e) => {
+        console.log("I love Vijay");
         e.preventDefault();
 
         const form = document.getElementById("editPlant");
@@ -286,8 +287,9 @@ function pollinatorUpdate() {
         `;
       singleDisplay.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(pollinatorId);
+
         const form = document.getElementById("editPollinator");
+        console.log(form.pollinatorDescription.value);
 
         fetch(`http://localhost:3000/pollinators/${pollinatorId}`, {
           method: "PATCH",
