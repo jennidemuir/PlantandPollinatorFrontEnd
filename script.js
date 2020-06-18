@@ -15,7 +15,7 @@ header.addEventListener("click", (e) => {
   switch (e.target.id) {
     case "plant":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
+      singleDisplay.innerHTML = "<h1 class='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPlants();
@@ -23,7 +23,7 @@ header.addEventListener("click", (e) => {
       break;
     case "pollinator":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
+      singleDisplay.innerHTML = "<h1 class='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       styleBlock();
       renderAllPollinators();
@@ -31,7 +31,7 @@ header.addEventListener("click", (e) => {
       break;
     case "form":
       container.innerHTML = "";
-      singleDisplay.innerHTML = "<h1 id='h1'>Plants and Pollinators</h1>";
+      singleDisplay.innerHTML = "<h1 class='h1'>Plants and Pollinators</h1>";
       capsule.style.backgroundImage = "";
       e.preventDefault();
       renderForm();
@@ -47,7 +47,7 @@ function styleBlock() {
 }
 function renderAllPlants() {
   plantArray.forEach((plant) => {
-    container.innerHTML += `<main class="plant-card"><p>${plant.common_name}<br>(${plant.latin_name})</br><br><img src="${plant.image}"><button class="renderplantbutton" id="${plant.id}">View More</button ></p><br>
+    container.innerHTML += `<main class="plant-card"><p>${plant.common_name}<br>(${plant.latin_name})</br><br><img src="${plant.image}"><br><button class="renderplantbutton" id="${plant.id}">View More</button ></p><br>
            
             
             </main>`;
@@ -76,7 +76,7 @@ function renderSinglePlants() {
                     }</p>
 
                     <h3 id ='h3'>Pollinators That Love This Plant: ${pollinatorNames.join(
-                      " "
+                      ",  "
                     )}</h3>
                    <button id ='${
                      targetedPlant.id
@@ -93,12 +93,6 @@ function fetchPollinator() {
     .then((pollinators) => {
       pollinatorArray = pollinators;
 
-      //   pollinators.forEach((pollinator) => {
-
-      //     container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}(${pollinator.species})</br><button class="renderButton" id="${pollinator.id}">View More</button></p>
-      //           <img src="${pollinator.image}">
-      //         </main>`;
-      //   });
     });
 }
 
@@ -107,19 +101,12 @@ function fetchPlants() {
     .then((res) => res.json())
     .then((plants) => {
       plantArray = plants;
-      //   plants.forEach((plant) => {
-
-      //     container.innerHTML += `<main class="plant-card"><p>${plant.common_name}(${plant.latin_name})</br><button id="${plant.id}">View More</button></p>
-      //         <img src="${plant.image}">
-
-      //         </main>`;
-      //   });
-    });
+     });
 }
 
 function renderAllPollinators() {
   pollinatorArray.forEach((pollinator) => {
-    container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}<br>(${pollinator.species})</br><br><img src="${pollinator.image}"><button class="renderpollinatorbutton" id="${pollinator.id}">View More</button></p><br>
+    container.innerHTML += `<main class="pollinator-card"><p>${pollinator.name}<br>(${pollinator.species})</br><br><img src="${pollinator.image}"><br><button class="renderpollinatorbutton" id="${pollinator.id}">View More</button></p><br>
               
             </main>`;
   });
@@ -135,7 +122,7 @@ function renderSinglePollinators() {
                     <div class="pollinatorDiv">
                     <h1>${targetedPollinator.name}</h1>
                     <h3> Species: ${targetedPollinator.species}</h3>
-                    <p class="pollinatorDescription">About This Pollinator: ${targetedPollinator.description}</p><br>
+                    <p class="pollinatorDescription">About This Pollinator: ${targetedPollinator.description}</p><br><br>
                     <button id="${targetedPollinator.id}" class="updatePollinator">Update Pollinator Information</button>
                     </div>
                     `;
@@ -171,7 +158,7 @@ function renderForm() {
               })
               .join(" ")}
               
-            <br><input type='submit' value='Submit'>
+            <br><input class='submit' type='submit' value='Submit'>
 
          </form>`;
   submitNewPlantEvent();
@@ -179,28 +166,23 @@ function renderForm() {
 
 function submitNewPlantEvent() {
   singleDisplay.addEventListener("submit", (e) => {
-    e.preventDefault();
     const form = document.getElementById("newPlantForm");
+    console.log(e.target)
+    e.preventDefault();
+    singleDisplay.innerHTML = `<h1 class='h1'>Thank You for Your Submission</h1><main class="plant-card"><p>${form.fname.value}<br>(${form.lname.value})</br><br><img src="${form.imgurl.value}"></main>`
+    
+    
 
     const checkboxes = Array.from(form.pollinator);
 
     const checkedPollinators = checkboxes.filter(
       (checkbox) => checkbox.checked === true
     );
-    // console.log(checkedPollinators)
 
     const sendPollinatorIds = checkedPollinators.map((pollinator) => {
       return pollinator.id;
     });
-    console.log(sendPollinatorIds);
-    // console.log(form.zone.value)
-    // console.log(form.fname.value)
-    // console.log(form.lname.value)
-    // console.log(form.description.value)
-    // console.log(form.imgurl.value)
 
-    // 2)  now we will filter out checkboxes that aren't checked
-    // 3)  after fitlering, map over array so that each element is an ID
     fetch("http://localhost:3000/plants", {
       method: "POST",
       headers: {
@@ -240,14 +222,22 @@ function plantUpdate() {
        
        <label name="plantZone"> Hardiness Zones:</label><br>
        <input name="plantZone" value="${plantZoneValue}">
-        <input type='submit' value='Submit'>
+        <input class='submit'type='submit' value='Submit'>
  
         </form>
         `;
       singleDisplay.addEventListener("submit", (e) => {
         e.preventDefault();
-
         const form = document.getElementById("editPlant");
+        singleDisplay.innerHTML = 
+                    `<h1 class='h1'>Thank You for Your Submission</h1>
+                    <div class="plantDiv">
+                    <p> Hardiness Zone: ${form.plantZone.value}</p>
+                    <p class='description'  >About This Plant:${
+                      form.plantDescription.value
+                    }</p> `;
+
+       
 
         fetch(`http://localhost:3000/plants/${plantId}`, {
           method: "PATCH",
@@ -282,7 +272,7 @@ function pollinatorUpdate() {
         }">
        
       
-        <input type='submit' value='Submit'>
+        <input class='submit' type='submit' value='Submit'>
  
         </form>
         `;
@@ -290,6 +280,12 @@ function pollinatorUpdate() {
         e.preventDefault();
         console.log(pollinatorId);
         const form = document.getElementById("editPollinator");
+        singleDisplay.innerHTML = `<h1 class='h1'>Thank You for Your Submission</h1> <div class="pollinatorDiv">
+        
+        <p class="pollinatorDescription">About This Pollinator: ${form.pollinatorDescription.value}</p><br>
+       
+        </div>`;
+        
 
         fetch(`http://localhost:3000/pollinators/${pollinatorId}`, {
           method: "PATCH",
@@ -298,8 +294,8 @@ function pollinatorUpdate() {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            plant: {
-              description: form.pollinatorDescription.value,
+            pollinator: {
+              description: form.pollinatorDescription.value
             },
           }),
         });
