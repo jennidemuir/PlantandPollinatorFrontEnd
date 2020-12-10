@@ -5,6 +5,7 @@ By clicking on a plant or pollinator they can learn more about it.
 Users can also update information or add a new plant to the database with notes on the pollinators it attracts. 
 
 [This](https://github.com/MagdalenaJasmine/Plants-and-Pollinators-API) is a link to the back-end repository
+[This](https://stellarwobble.github.io/PlantandPollinatorFrontEnd/) is a link to the front-end
 
 ## Motivation ##
 We wanted to create an app to make it easy to create pollinator friendly gardens which helps boost vital ecosystems in their areas. 
@@ -33,7 +34,7 @@ Users Can:
 * Submit a new plant 
 
 ## Installation ## 
-You can find the live link for this project [here]()
+You can find the live link for this project [here](https://stellarwobble.github.io/PlantandPollinatorFrontEnd/)
 
 Clone the back-end repo and run the following commands in order 
 * bundle install 
